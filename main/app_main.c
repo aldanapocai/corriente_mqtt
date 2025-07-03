@@ -194,6 +194,13 @@ void app_main(void)
         } else {
             ESP_LOGW(TAG, "No hubo datos en UART dentro del timeout");
         }
+        // Hardcoded/random values for Sala and Garage para la demo
+        float sala_val = 1.0f + ((float)rand() / RAND_MAX) * 0.5f;      // 1.0 a 1.5
+        float garage_val = 2.6f + ((float)rand() / RAND_MAX) * 0.3f;    // 2.6 a 2.9
+        publish_corriente("Sala", sala_val);
+        ESP_LOGI(TAG, "Corriente publicada (Sala): %.2f A", sala_val);
+        publish_corriente("Garage", garage_val);
+        ESP_LOGI(TAG, "Corriente publicada (Garage): %.2f A", garage_val);
         // Esperar 5 segundos antes de la siguiente lectura
         vTaskDelay(pdMS_TO_TICKS(5000));
     }
